@@ -1,4 +1,4 @@
-# 551-in-class
+# 551inclass
 _IJulia notebooks for EECS 453/551_
 
 ## Connecting to JuliaBox
