@@ -8,16 +8,16 @@ USER root
 RUN apt-get update
 RUN apt-get install -y julia libnettle4 && apt-get clean
 
-# add Julia nightly build
-RUN mkdir -p /opt/julia_0.4.0 && \
-    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-rc2-linux-x86_64.tar.gz | tar -C /opt/julia_0.4.0 -x -z --strip-components=1 -f -
-RUN ln -fs /opt/julia_0.4.0 /opt/julia_nightly
-
-
 USER main
 
 # Install Julia kernel
 RUN julia -e 'Pkg.add("IJulia")'
-RUN julia -e 'Pkg.add("Gadfly")' && julia -e 'Pkg.add("RDatasets")'
+RUN julia -e 'Pkg.add("Gadfly")'
+
+# add Julia nightly build
+RUN mkdir -p julia_0.4.0 && \
+    curl -s -L https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-rc2-linux-x86_64.tar.gz | tar -C julia_0.4.0 -x -z --strip-components=1 -f -
+RUN ln -fs julia_0.4.0/bin/julia julia_nightly
+
 
 RUN julia_nightly -e 'Pkg.add("IJulia")'
