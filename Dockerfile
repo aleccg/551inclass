@@ -19,7 +19,7 @@ RUN julia -e 'Pkg.update()'
 USER root
 
 RUN mkdir -p /home/main/julia_0.4 && \
-    curl -sL https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-rc4-linux-x86_64.tar.gz | tar -C /home/main/julia_0.4 -xz --strip-components=1 -f -
+    sudo curl -sL https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-rc4-linux-x86_64.tar.gz | tar -C /home/main/julia_0.4 -xz --strip-components=1 -f -
 #RUN ln -fs /home/main/julia_0.4/bin/julia j4
 
 USER main
