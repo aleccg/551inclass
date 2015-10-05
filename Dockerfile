@@ -6,7 +6,7 @@ USER root
 
 # Add Julia dependencies
 #RUN apt-get update
-#RUN apt-get install -y julia libnettle4 && apt-get clean
+#RUN apt-get install -y julia libnettle4 libhdf5-dev && apt-get clean
 
 #RUN echo "cacert=/etc/ssl/certs/ca-certificates.crt" >> /home/main/.curlrc
 
@@ -30,3 +30,6 @@ RUN echo 'IJulia\nPyPlot\nGadfly\nGraphs\nMAT\nJLD\nInteract\nReactive\nImages\n
 
 # install packages & deps with Pkg.update()
 RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
+
+# precompile modules
+RUN /home/main/julia_0.4/bin/julia -e 'using PyPlot, Gadfly'
