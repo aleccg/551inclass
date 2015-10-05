@@ -20,8 +20,10 @@ USER root
 
 RUN mkdir -p /home/main/julia_0.4 && \
     curl -kL https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-rc4-linux-x86_64.tar.gz | tar -C /home/main/julia_0.4 -xz --strip-components=1 -f -
-#RUN ln -fs /home/main/julia_0.4/bin/julia j4
 
 USER main
+
+# fix ca-certs issue (to install Blosc)
+RUN echo "cacert=/etc/ssl/certs/ca-certificates.crt" >> /home/main/.curlrc
 
 RUN /home/main/julia_0.4/bin/julia -e 'Pkg.add("IJulia")'
