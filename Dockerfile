@@ -18,7 +18,9 @@ RUN mkdir -p /home/main/julia_0.4 && \
     curl -kL https://julialang.s3.amazonaws.com/bin/linux/x64/0.4/julia-0.4.0-rc4-linux-x86_64.tar.gz | tar -C /home/main/julia_0.4 -xz --strip-components=1 -f -
 
 # install Julia packages
-RUN mkdir -p /home/main/.julia/v0.4
+RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
+
+#RUN mkdir -p /home/main/.julia/v0.4
 
 RUN echo $'PyPlot\n\
 Gadfly\n\
