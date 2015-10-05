@@ -16,11 +16,7 @@ RUN mkdir -p /home/main/julia_0.4 && \
 
 RUN /home/main/julia_0.4/bin/julia -e 'Pkg.add("MAT")'
 
-USER main
-
-# fix ca-certs issue (to install Blosc)
-RUN echo "cacert=/etc/ssl/certs/ca-certificates.crt" >> /home/main/.curlrc
-
+# install Julia packages
 RUN cat <<EOT >> /home/main/.julia/v0.4/REQUIRE
 PyPlot
 Gadfly
@@ -32,5 +28,10 @@ Reactive
 Images
 PyCall
 EOT
+
+USER main
+
+# fix ca-certs issue (to install Blosc)
+RUN echo "cacert=/etc/ssl/certs/ca-certificates.crt" >> /home/main/.curlrc
 
 RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
