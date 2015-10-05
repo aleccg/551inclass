@@ -30,6 +30,7 @@ JLD
 Interact
 Reactive
 Images
+PyCall
 EOT
 
 RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
