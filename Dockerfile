@@ -22,16 +22,7 @@ RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
 
 #RUN mkdir -p /home/main/.julia/v0.4
 
-RUN echo $'PyPlot\n\
-Gadfly\n\
-Graphs\n\
-MAT\n\
-JLD\n\
-Interact\n\
-Reactive\n\
-Images\n\
-PyCall\n\'\
-> /home/main/.julia/v0.4/REQUIRE
+RUN echo 'PyPlot\nGadfly\nGraphs\nMAT\nJLD\nInteract\nReactive\nImages\nPyCall' > /home/main/.julia/v0.4/REQUIRE
 
 RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
 
