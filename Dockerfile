@@ -20,17 +20,17 @@ RUN mkdir -p /home/main/julia_0.4 && \
 # install Julia packages
 RUN mkdir -p /home/main/.julia/v0.4
 
-RUN cat <<EOT >> /home/main/.julia/v0.4/REQUIRE
-PyPlot
-Gadfly
-Graphs
-MAT
-JLD
-Interact
-Reactive
-Images
-PyCall
-EOT
+RUN echo $'PyPlot\n\
+Gadfly\n\
+Graphs\n\
+MAT\n\
+JLD\n\
+Interact\n\
+Reactive\n\
+Images\n\
+PyCall\n\'\
+> /home/main/.julia/v0.4/REQUIRE
+
+RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
 
 USER main
-RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
