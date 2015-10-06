@@ -25,11 +25,18 @@ USER main
 # initialize Julia package dir
 RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
 
+# install packages that require sudo apt-get
+USER root
+RUN /home/main/julia_0.4/bin/julia -e 'Pkg.add("MAT")'
+RUN /home/main/julia_0.4/bin/julia -e 'Pkg.add("Images")'
+
+USER main
+
 # add necessary packages to REQUIRE
-RUN echo 'IJulia\nPyPlot\nGadfly\nGraphs\nMAT\nJLD\nInteract\nReactive\nImages\nPyCall' > /home/main/.julia/v0.4/REQUIRE
+RUN echo 'IJulia\nPyPlot\nGadfly\nGraphs\JLD\nInteract\nReactive\nPyCall' >> /home/main/.julia/v0.4/REQUIRE
 
 # install packages & deps with Pkg.update()
-RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()'
+RUN /home/main/julia_0.4/bin/julia -e 'Pkg.update()' > /dev/null
 
 # precompile modules
-RUN /home/main/julia_0.4/bin/julia -e 'using PyPlot, Gadfly'
+RUN /home/main/julia_0.4/bin/julia -e 'using PyPlot, Gadfly' > /dev/null
