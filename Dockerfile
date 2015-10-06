@@ -6,7 +6,7 @@ USER root
 
 # Add Julia dependencies
 #RUN apt-get update
-#RUN apt-get install -y julia libnettle4 libhdf5-dev && apt-get clean
+#RUN apt-get install -y julia libnettle4 hdf5-tools libmagickwand5 && apt-get clean
 
 #RUN echo "cacert=/etc/ssl/certs/ca-certificates.crt" >> /home/main/.curlrc
 
